@@ -57,5 +57,13 @@
             var task = await _taskService.DeleteTaskAsync(id);
             return NoContent();
         }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateTaskAsync([FromBody] TaskDto taskDto )
+        { 
+            var task = _mapper.Map<ManagerTask>(taskDto);
+            var updatedTask = await _taskService.UpdateTaskAsync(task);
+            return Ok(updatedTask);
+        }
     }
 }

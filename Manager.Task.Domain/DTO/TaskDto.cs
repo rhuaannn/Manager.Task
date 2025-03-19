@@ -5,6 +5,7 @@ namespace Manager.Task.Domain.DTO
 {
     public class TaskDto
     {
+        public Guid Id { get; set; }
         public string Title { get; set; }
         public string? Description { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;

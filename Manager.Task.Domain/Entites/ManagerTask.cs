@@ -8,9 +8,9 @@ namespace Manager.Task.Domain.Task
     {
         [Key]
        public Guid Id { get; set; } = Guid.NewGuid();
-        public Title Title { get; private set; }
+        public Title Title { get;  set; }
 
-        public Description Description { get; private set; }
+        public Description Description { get;  set; }
 
         public DateTime Date { get; set; } = DateTime.Now;
 

@@ -1,12 +1,12 @@
-﻿using Manager.Task.Application.Interfaces;
-using Manager.Task.Domain.Task;
-using Manager.Task.Infra.Context;
-using Microsoft.EntityFrameworkCore;
-using ZstdSharp;
-
+﻿using Manager.Task.Domain.ValueObject;
 
 namespace Manager.Task.Application.Services
 {
+    using Manager.Task.Application.Interfaces;
+    using Manager.Task.Domain.Task;
+    using Manager.Task.Infra.Context;
+    using Microsoft.EntityFrameworkCore;
+
     public class TaskServices : ITask
     {
         private readonly DbContextApi _context;
@@ -19,7 +19,7 @@ namespace Manager.Task.Application.Services
         public async Task<ManagerTask> CreateTaskAsync(ManagerTask managerTask)
         {
             var createTask = await _context.ManagerTasks.AddAsync(managerTask);
-            if(managerTask.Date != DateTime.Now)
+            if (managerTask.Date != DateTime.Now)
             {
                 throw new Exception("Task not created");
             }
@@ -48,17 +48,33 @@ namespace Manager.Task.Application.Services
 
         public async Task<ManagerTask> GetTaskByIdAsync(Guid id)
         {
-           var taskById =  await _context.ManagerTasks.FindAsync(id);
-           if (taskById != null)
-           {
-               return taskById;
-           }
-           throw new Exception("Task not found");
+            var taskById = await _context.ManagerTasks.FindAsync(id);
+            if (taskById != null)
+            {
+                return taskById;
+            }
+            throw new Exception("Task not found");
         }
 
-        public Task<ManagerTask> UpdateTaskAsync(ManagerTask managerTask)
+        public async Task<ManagerTask> UpdateTaskAsync(ManagerTask managerTask)
         {
-            throw new NotImplementedException();
+            var existingTask = await _context.ManagerTasks.FindAsync(managerTask.Id);
+            if (existingTask == null)
+            {
+                throw new KeyNotFoundException("Task not found.");
+            }
+
+            existingTask.Title = new Title(managerTask.Title.ToString());
+            existingTask.Description = new Description(managerTask.Description.DescriptionTask); 
+            existingTask.Date = managerTask.Date;
+            existingTask.Status = managerTask.Status;
+            existingTask.Priority = managerTask.Priority;
+
+            _context.Entry(existingTask).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+
+            return existingTask;
         }
     }
 }
