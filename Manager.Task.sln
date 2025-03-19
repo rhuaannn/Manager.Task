@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156 d17.13
+VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manager.Task.Domain", "Manager.Task.Domain\Manager.Task.Domain.csproj", "{196E4E5C-19E9-49E7-BD98-A4BB42149A16}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manager.Task.Application", "Manager.Task.Application\Manager.Task.Application.csproj", "{0B6C15D4-F23B-4391-A618-7F19EE7808DB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manager.Task.Communication", "Manager.Task.Communication\Manager.Task.Communication.csproj", "{9BFFF952-B11C-4BC2-9AD1-F68542CA75C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manager.Task.Infra", "Manager.Task.Infra\Manager.Task.Infra.csproj", "{1E9A3488-F300-47EE-AFAF-3AE6C0A82367}"
 EndProject
@@ -33,10 +31,6 @@ Global
 		{0B6C15D4-F23B-4391-A618-7F19EE7808DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B6C15D4-F23B-4391-A618-7F19EE7808DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B6C15D4-F23B-4391-A618-7F19EE7808DB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9BFFF952-B11C-4BC2-9AD1-F68542CA75C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BFFF952-B11C-4BC2-9AD1-F68542CA75C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BFFF952-B11C-4BC2-9AD1-F68542CA75C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BFFF952-B11C-4BC2-9AD1-F68542CA75C4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1E9A3488-F300-47EE-AFAF-3AE6C0A82367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1E9A3488-F300-47EE-AFAF-3AE6C0A82367}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E9A3488-F300-47EE-AFAF-3AE6C0A82367}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,7 +43,6 @@ Global
 		{575BDC15-7A78-4642-BB1F-000FFAD94803} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{196E4E5C-19E9-49E7-BD98-A4BB42149A16} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{0B6C15D4-F23B-4391-A618-7F19EE7808DB} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{9BFFF952-B11C-4BC2-9AD1-F68542CA75C4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{1E9A3488-F300-47EE-AFAF-3AE6C0A82367} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

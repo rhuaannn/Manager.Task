@@ -1,19 +1,18 @@
-﻿using AutoMapper;
-using Manager.Task.Application;
-using Manager.Task.Application.Interfaces;
-using Manager.Task.Domain.DTO;
-using Manager.Task.Domain.Task;
-using Manager.Task.Infra.Context;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Manager.Task.Api.Controllers
+﻿namespace Manager.Task.Api.Controllers
 {
-    [Route("api/[controller]")]
+    using AutoMapper;
+    using Manager.Task.Application.Interfaces;
+    using Manager.Task.Domain.DTO;
+    using Manager.Task.Domain.Task;
+    using Microsoft.AspNetCore.Mvc;
+
+        [Route("api/[controller]")]
     [ApiController]
     public class TaskController : ControllerBase
     {
-        private readonly ITask _taskService;
-        private readonly IMapper _mapper;
+                private readonly ITask _taskService;
+
+                private readonly IMapper _mapper;
 
         public TaskController(ITask taskService, IMapper mapper)
         {
@@ -21,7 +20,9 @@ namespace Manager.Task.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+                [HttpGet]
+        [ProducesResponseType(typeof(TaskResponseDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get()
         {
 
@@ -30,12 +31,31 @@ namespace Manager.Task.Api.Controllers
             return Ok(taskDtos);
         }
 
-        [HttpPost]
+                [HttpPost]
+        [ProducesResponseType(typeof(TaskResponseDto), StatusCodes.Status201Created)]
         public async Task<IActionResult> Post([FromBody] TaskDto taskDto)
         {
             var task = _mapper.Map<ManagerTask>(taskDto);
             var createTask = await _taskService.CreateTaskAsync(task);
-            return Ok(createTask);
+            var TaskResponseDto = _mapper.Map<TaskResponseDto>(createTask);
+            return CreatedAtAction(nameof(GetTaskById), new { id = TaskResponseDto.Id }, TaskResponseDto);
+        }
+
+                [HttpGet("{id:Guid}")]
+        [ProducesResponseType(typeof(TaskResponseDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetTaskById(Guid id)
+        {
+            var task = await _taskService.GetTaskByIdAsync(id);
+            var taskDto = _mapper.Map<TaskResponseDto>(task);
+            return Ok(taskDto);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var task = await _taskService.DeleteTaskAsync(id);
+            return NoContent();
         }
     }
 }

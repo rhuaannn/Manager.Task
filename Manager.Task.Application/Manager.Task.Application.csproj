@@ -7,13 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Manager.Task.Communication\Manager.Task.Communication.csproj" />
     <ProjectReference Include="..\Manager.Task.Domain\Manager.Task.Domain.csproj" />
     <ProjectReference Include="..\Manager.Task.Infra\Manager.Task.Infra.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
