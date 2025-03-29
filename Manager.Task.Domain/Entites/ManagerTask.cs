@@ -7,10 +7,12 @@ namespace Manager.Task.Domain.Task
     public class ManagerTask
     {
         [Key]
-       public Guid Id { get; set; } = Guid.NewGuid();
-        public Title Title { get;  set; }
+        [Required]
+        public Guid Id { get; set; } = Guid.NewGuid();
 
-        public Description Description { get;  set; }
+        public Title Title { get; set; }
+
+        public Description Description { get; set; }
 
         public DateTime Date { get; set; } = DateTime.Now;
 
@@ -26,9 +28,10 @@ namespace Manager.Task.Domain.Task
             Status = status;
             Priority = priority;
         }
+
         public ManagerTask()
         {
-
+            
         }
     }
 

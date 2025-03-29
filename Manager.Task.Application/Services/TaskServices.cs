@@ -1,4 +1,5 @@
-﻿using Manager.Task.Domain.ValueObject;
+﻿using Manager.Task.Domain.Enums;
+using Manager.Task.Domain.ValueObject;
 
 namespace Manager.Task.Application.Services
 {
@@ -19,9 +20,13 @@ namespace Manager.Task.Application.Services
         public async Task<ManagerTask> CreateTaskAsync(ManagerTask managerTask)
         {
             var createTask = await _context.ManagerTasks.AddAsync(managerTask);
-            if (managerTask.Date != DateTime.Now)
+            if (!Enum.IsDefined(typeof(Priority), managerTask.Priority))
             {
-                throw new Exception("Task not created");
+                throw new Exception("Priority not found");
+            }
+            if(!Enum.IsDefined(typeof(Status), managerTask.Status))
+            {
+                throw new Exception("Status not found");
             }
             await _context.SaveChangesAsync();
             return managerTask;
@@ -65,7 +70,7 @@ namespace Manager.Task.Application.Services
             }
 
             existingTask.Title = new Title(managerTask.Title.ToString());
-            existingTask.Description = new Description(managerTask.Description.DescriptionTask); 
+            existingTask.Description = new Description(managerTask.Description.DescriptionTask);
             existingTask.Date = managerTask.Date;
             existingTask.Status = managerTask.Status;
             existingTask.Priority = managerTask.Priority;
